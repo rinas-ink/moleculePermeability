@@ -1,10 +1,13 @@
 from s4dd import S4forDenovoDesign
+import torch
+device = torch.device("cuda") if torch.cuda.is_available() else 'cpu'
+print(device)
 
 # Create an S4 model with (almost) the same parameters in the paper.
 s4 = S4forDenovoDesign(
     n_max_epochs=1,  # This is for only demonstration purposes. Set this to a (much) higher value for actual training. Default: 400.
     batch_size=64,  # This is also for demonstration purposes. The value in the paper is 2048.
-    device="cpu",  # Replace this with "cpu" if you didn't install pytorch with CUDA support.
+    device=device,  # Replace this with "cpu" if you didn't install pytorch with CUDA support.
 )
 # Pretrain the model on ChEMBL
 s4.train(
